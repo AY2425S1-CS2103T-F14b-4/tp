@@ -100,8 +100,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        boolean updatedPaid = editPersonDescriptor.getPaid().orElse(personToEdit.getPaid());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedPaid);
     }
 
     @Override
@@ -138,6 +139,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private boolean paid;
 
         public EditPersonDescriptor() {}
 
@@ -151,6 +153,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setPaid(toCopy.paid);
         }
 
         /**
@@ -209,6 +212,14 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        public void setPaid(boolean paid) {
+            this.paid = paid;
+        }
+
+        public Optional<Boolean> getPaid() {
+            return Optional.ofNullable(paid);
+        }
+
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -225,7 +236,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+                    && Objects.equals(tags, otherEditPersonDescriptor.tags)
+                    && Objects.equals(paid, otherEditPersonDescriptor.paid);
         }
 
         @Override
@@ -236,6 +248,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("tags", tags)
+                    .add("paid", paid)
                     .toString();
         }
     }

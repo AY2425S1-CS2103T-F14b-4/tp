@@ -36,7 +36,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.paid = false;
+        this.paid = paid;
     }
 
     public Name getName() {

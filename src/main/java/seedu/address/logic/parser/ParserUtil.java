@@ -121,4 +121,13 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    public static boolean parsePaid(String paid) throws ParseException {
+        requireNonNull(paid);
+        String trimmedPaid = paid.trim();
+        if (!trimmedPaid.equalsIgnoreCase("true") && !trimmedPaid.equalsIgnoreCase("false")) {
+            throw new ParseException("Paid field must be either 'true' or 'false'.");
+        }
+        return Boolean.parseBoolean(trimmedPaid);
+    }
 }

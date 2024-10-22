@@ -13,8 +13,9 @@ Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for man
 ## Quick start
 
 1. Ensure you have Java `17` or above installed in your Computer.
-   1. Should you require help, [here](https://www.oracle.com/java/technologies/downloads/#java17) is the download link to Java '17'
-   2. After accessing the website, please choose the right download link for your operating system (Linux, macOS or Windows)
+    1. You can check which version of Java you are currently running by entering `java -version` into a command terminal.
+    2. Should you require help, [here](https://www.oracle.com/java/technologies/downloads/#java17) is the download link to Java '17'
+    3. After accessing the website, please choose the right download link for your operating system (Linux, macOS or Windows)
 
 2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
@@ -23,14 +24,17 @@ Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for man
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fart_in_a.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/newUi.png)
    1. To open the command terminal, do open the terminal app for Linux/macOS users, and Windows Powershell for Windows users.
    2. For most users, in the terminal window please type `cd Downloads` to change the current folder to Downloads
+   3. Alternatively, you may navigate to the folder using File Explorer, then right click it and select **Open in Terminal**
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
+   
+   * `help` : Opens the Help window containing all valid commands and their respective formats
 
    * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11 09 2001` : Adds a contact named `John Doe` to the FART book and automatically marks them as unpaid.
 
@@ -41,6 +45,10 @@ Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for man
    * `clear` : Deletes all contacts.
 
    * `find john`  : Displays all contacts with keyword(s) matching "john"
+   
+   * `find 9123`  : Displays all contacts with phone number(s) containing "9123" 
+   
+   * `find serangoon` : Displays all contacts with keyword(s) matching "serangoon" 
 
    * `exit` : Exits the app.
 
@@ -68,15 +76,17 @@ Financial Assurance Revolutionary Telemarketer (FART) is a **desktop app for man
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+* If the command specifies an index after the command word, e.g. `paid 3`, the index must be **valid** <br>
+  i.e. the index must be visible in the contact list
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining the various commands and their formats.
 
-![help message](images/helpMessage.png)
+![help message](images/newHelpMessage.png)
 
 Format: `help`
 
@@ -93,11 +103,14 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/11 09 2001`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 b/11 09 2001 t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/91234567 b/11 09 2001 t/criminal`
+
+**Note:** As of version 1.3, only valid email addresses and Singapore phone numbers are accepted. 
+Birthdays should be added in DD MM YYYY format.
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the FART book.
+Shows a list of all persons in the FART book. The list is displayed in chronological order (i.e., the order you added the contacts in).
 
 Format: `list`
 
@@ -147,7 +160,7 @@ Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, … and cannot be larger than the length of the list.​
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the FART book.
@@ -157,7 +170,9 @@ Examples:
  contact that you want to delete is correct. If you select `Cancel`, the deletion will be aborted.
 ### Clearing all entries : `clear`
 
-Clears all entries from the FART book.
+Clears all entries from the FART book. 
+
+**Note:** This action cannot be undone.
 
 Format: `clear`
 
@@ -169,7 +184,7 @@ Format: `paid INDEX`
 
 * Marks the person at the specified `INDEX` as paid.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, … and cannot be larger than the length of the list.​
 
 Examples:
 * `list` followed by `paid 2` marks the 2nd person in the FART book as paid.
@@ -183,15 +198,18 @@ Format: `unpaid INDEX`
 
 * Marks the person at the specified `INDEX` as unpaid.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, … and cannot be larger than the length of the list.​
 
 Examples:
 * `list` followed by `unpaid 2` marks the 2nd person in the FART book as unpaid.
 * `find Betsy` followed by `unpaid 1` marks the 1st person in the results of the `find` command as unpaid.
 
 ### Viewing a Contact's Details
-* **Double-click** on a contact in the contact list to bring up a more detailed view of the person, including information like address and birthday
+* **Double-click** on a contact in the contact list to bring up a more detailed view of the person, including information like address and birthday on the right window.
+* You may resize this window to your own convenience. 
+* If the contact list is empty, a placeholder prompting you to add a contact will be displayed instead.
 * **Note:** The displayed contact will persist and edits will not be reflected until you select another contact or close the FART book.
+
 ### Exiting the program : `exit`
 
 Exits the program.
